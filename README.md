@@ -1,6 +1,7 @@
 # ssdeep
 
 [![Build Status](https://travis-ci.org/pchaigno/node-ssdeep.svg?branch=master)](https://travis-ci.org/pchaigno/node-ssdeep)
+[![Coverage Status](https://coveralls.io/repos/github/pchaigno/node-ssdeep/badge.svg?branch=master)](https://coveralls.io/github/pchaigno/node-ssdeep?branch=master)
 
 Node.js wrapper for the ssdeep fuzzy hashing library.
 
