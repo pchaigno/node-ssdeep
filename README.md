@@ -1,5 +1,7 @@
 # ssdeep
 
+[![Build Status](https://travis-ci.org/pchaigno/node-ssdeep.svg?branch=master)](https://travis-ci.org/pchaigno/node-ssdeep)
+
 Node.js wrapper for the ssdeep fuzzy hashing library.
 
 ## Installation
