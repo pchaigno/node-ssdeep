@@ -69,7 +69,7 @@ describe('ssdeep', function() {
       expect(hash).to.eql(hash_lorem1);
     });
   });
-  
+
   context('compute hash for inexistant file', function() {
     it('returns the expected hash', function() {
       var hash = ssdeep.hash_from_file('lorem1.txt');
