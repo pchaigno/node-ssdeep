@@ -61,6 +61,30 @@ describe('ssdeep', function() {
     });
   });
 
+  //return computed hash from buffer
+  //hash_from_buffer
+  context('compute hash for buffer', function() {
+
+    var buf1;
+    beforeEach(function() {
+      //fs.readFileSync returns buffer if no options specified
+      //if option like utf8 specified returns string
+
+      //note on fs.readFileSync , if option encoding ('utf8' in this example):
+      // buf1 = fs.readFileSync('test/lorem1.txt', 'utf8');
+      //passed readFileSync returns a String
+      //If you leave option encoding off, then returns buffer
+      buf1 = fs.readFileSync('test/lorem1.txt');
+
+    });
+
+    it('returns the expected hash', function() {
+      var ssdeep = require('../src/index.js');
+      var hash = ssdeep.hash_from_buffer(buf1,'utf8');
+      expect(hash).to.eql(hash_lorem1);
+
+    });
+  });
 
 
   context('compute hash for file', function() {

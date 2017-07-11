@@ -10,6 +10,12 @@ var ssdeep = ffi.Library('libfuzzy', {
   'fuzzy_compare': ['int', ['string', 'string']]
 });
 
+var ssdeepalt =ffi.Library('libfuzzy', {
+  'fuzzy_hash_buf': ['int', ['pointer', 'uint32', 'pointer']],
+  'fuzzy_hash_filename': ['int', ['string', 'pointer']],
+  'fuzzy_compare': ['int', ['string', 'string']]
+});
+
 module.exports = {
   hash: function(plaintext) {
 
@@ -26,6 +32,20 @@ module.exports = {
     return hash;
   },
 
+  hash_from_buffer: function(buff){
+
+    var hashPtr = ref.allocCString(Array(FUZZY_MAX_RESULT).join(' '),'utf8');
+
+    var res = ssdeepalt.fuzzy_hash_buf(buff, buff.length, hashPtr);
+    if(res != 0) {
+      return null;
+    }
+
+    var hash = hashPtr.readCString();
+
+
+    return hash;
+  },
   hash_from_file: function(filepath) {
 
     var hashPtr = ref.allocCString(Array(FUZZY_MAX_RESULT).join(' '));
