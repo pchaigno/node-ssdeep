@@ -12,7 +12,7 @@ const FUZZY_MAX_RESULT = (2 * SPAMSUM_LENGTH + 20);
 //ubuntu path is /usr/lib/libfuzzy.so
 
 
-var ssdeep = ffi.Library(path.join(settings.ssdeepLibraryPath,'libfuzzy'), {
+var ssdeep = ffi.Library(settings.ssdeepLibraryPath, {
   'fuzzy_hash_buf': ['int', ['string', 'uint32', 'pointer']],
   'fuzzy_hash_filename': ['int', ['string', 'pointer']],
   'fuzzy_compare': ['int', ['string', 'string']]
