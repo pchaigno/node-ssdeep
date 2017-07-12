@@ -1,10 +1,18 @@
 var ref = require('ref');
 var ffi = require('ffi');
+var path = require('path');
+var settings = require('./settings.js');
 
 const SPAMSUM_LENGTH = 64;
 const FUZZY_MAX_RESULT = (2 * SPAMSUM_LENGTH + 20);
 
-var ssdeep = ffi.Library('libfuzzy', {
+
+//update your ssdeepLibraryPath in settings.js to match your specific operating systems libfuzzy path
+//for example in redhat path on 64-bit might be /usr/lib64/libfuzzy.so.2
+//ubuntu path is /usr/lib/libfuzzy.so
+
+
+var ssdeep = ffi.Library(path.join(settings.ssdeepLibraryPath,'libfuzzy'), {
   'fuzzy_hash_buf': ['int', ['string', 'uint32', 'pointer']],
   'fuzzy_hash_filename': ['int', ['string', 'pointer']],
   'fuzzy_compare': ['int', ['string', 'string']]
