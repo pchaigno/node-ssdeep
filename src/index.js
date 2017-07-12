@@ -18,7 +18,7 @@ var ssdeep = ffi.Library(settings.ssdeepLibraryPath, {
   'fuzzy_compare': ['int', ['string', 'string']]
 });
 
-var ssdeepalt =ffi.Library('libfuzzy', {
+var ssdeepalt =ffi.Library(settings.ssdeepLibraryPath, {
   'fuzzy_hash_buf': ['int', ['pointer', 'uint32', 'pointer']],
   'fuzzy_hash_filename': ['int', ['string', 'pointer']],
   'fuzzy_compare': ['int', ['string', 'string']]
