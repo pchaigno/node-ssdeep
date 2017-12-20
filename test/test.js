@@ -1,20 +1,91 @@
 var ssdeep = require('../src/index.js');
-var expect = require('chai').expect
+var chai = require('chai');
+var expect = chai.expect;
 var fs = require('fs');
+var should = chai.should();
+var assert = require('assert');
+
+
+
+
 
 describe('ssdeep', function() {
+
+  //mocha sanity check
+  describe('#equal', function () {
+
+    var three = '3';
+    it('should return true that 3 equals "3"', function (done) {
+      assert.equal(three, '3', '3 equals "3"');
+      done();
+    });
+    it('"3" only strictly equals 3.toString()', function (done) {
+      assert.strictEqual(three, '3', '3 equals "3"');
+      done();
+    });
+  });
+
+
   var hash_lorem1 = '192:NAE6bcwSSZcKiBwrOdGrecEFBJSE+51vasvxc2CaB1pqU80oEhwNeLivjlSbLbZv:aEXciJarmD0701o7pACWiV1ut87tD';
 
-  context('compute hash for string', function() {
-    var content; 
+
+  context('test for string', function() {
+    var content;
     beforeEach(function() {
       content = fs.readFileSync('test/lorem1.txt', 'utf8');
     });
-    it('returns the expected hash', function() {
-      var hash = ssdeep.hash(content);
-      expect(hash).to.eql(hash_lorem1);
+    it('returns the expected string', function() {
+
+      var textTxt='hello';
+      expect(textTxt).to.eql('hello');
+
+
     });
   });
+
+  context('compute hash for string', function() {
+    var content;
+    beforeEach(function() {
+      //fs.readFileSync returns buffer if no options specified
+      //if option like utf8 specified returns string
+      content = fs.readFileSync('test/lorem1.txt', 'utf8');
+
+
+    });
+
+    it('returns the expected hash', function() {
+     var ssdeep = require('../src/index.js');
+      var hash = ssdeep.hash(content,'utf8');
+      expect(hash).to.eql(hash_lorem1);
+
+    });
+  });
+
+  //return computed hash from buffer
+  //hash_from_buffer
+  context('compute hash for buffer', function() {
+
+    var buf1;
+    beforeEach(function() {
+      //fs.readFileSync returns buffer if no options specified
+      //if option like utf8 specified returns string
+
+      //note on fs.readFileSync , if option encoding ('utf8' in this example):
+      // buf1 = fs.readFileSync('test/lorem1.txt', 'utf8');
+      //passed readFileSync returns a String
+      //If you leave option encoding off, then returns buffer
+      buf1 = fs.readFileSync('test/lorem1.txt');
+
+    });
+
+    it('returns the expected hash', function() {
+      var ssdeep = require('../src/index.js');
+      var hash = ssdeep.hash_from_buffer(buf1,'utf8');
+      expect(hash).to.eql(hash_lorem1);
+
+    });
+  });
+
 
   context('compute hash for file', function() {
     it('returns the expected hash', function() {
