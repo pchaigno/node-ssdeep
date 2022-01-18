@@ -1,5 +1,5 @@
-var ref = require('ref');
-var ffi = require('ffi');
+var ref = require('ref-napi');
+var ffi = require('ffi-napi');
 
 const SPAMSUM_LENGTH = 64;
 const FUZZY_MAX_RESULT = (2 * SPAMSUM_LENGTH + 20);
